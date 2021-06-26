@@ -3,13 +3,18 @@ package com.blz.AddressBookSpring.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.blz.AddressBookSpring.AddressBookRepository.AddressBookRepository;
 import com.blz.AddressBookSpring.DTO.AddressBookDTO;
 import com.blz.AddressBookSpring.model.AddressBookData;
 
 @Service
 public class AddressBookService implements IAddressBookService {
+	
+	@Autowired
+	AddressBookRepository addressBookRepository;
 	
 	private List<AddressBookData> addressBookList = new ArrayList<>();
 

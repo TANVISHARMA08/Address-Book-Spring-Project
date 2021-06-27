@@ -21,8 +21,11 @@ import com.blz.AddressBookSpring.DTO.ResponseDTO;
 import com.blz.AddressBookSpring.model.AddressBookData;
 import com.blz.AddressBookSpring.services.IAddressBookService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/addressbook")
+@Slf4j
 public class AddressBookController {
 	
 	@Autowired
@@ -46,6 +49,7 @@ public class AddressBookController {
 
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> addAddressBookData( @Valid @RequestBody AddressBookDTO addressBookDTO){
+		log.debug("AddressBook DTO: "+addressBookDTO.toString());
 		AddressBookData addressBookData = addressBookService.createAddressBookData(addressBookDTO);
 		ResponseDTO respDTO = new ResponseDTO("Create AddressBOOK Data Successfull", addressBookData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.blz.AddressBookSpring.AddressBookRepository.AddressBookRepository;
 import com.blz.AddressBookSpring.DTO.AddressBookDTO;
+import com.blz.AddressBookSpring.exceptions.AddressBookException;
 import com.blz.AddressBookSpring.model.AddressBookData;
 
 @Service
@@ -25,7 +26,10 @@ public class AddressBookService implements IAddressBookService {
 
 	@Override
 	public AddressBookData getAddressBookDataById(int addId) {
-		return addressBookList.get(addId-1);
+		return addressBookList.stream()
+			.filter(addData -> addData.getAddressBookId() == addId)
+			.findFirst()
+			.orElseThrow(() -> new AddressBookException("Data not found !! Invalid ID"));
 	}
 
 	@Override
